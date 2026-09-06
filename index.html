@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lịch Làm Việc</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <button id="prevBtn">&lt; Tháng trước</button>
+        <h1 id="monthYear">Tháng / Năm</h1>
+        <button id="nextBtn">Tháng sau &gt;</button>
+    </header>
+
+    <div id="loading">Đang tải</div>
+
+    <div class="weekdays">
+        <div>CN</div><div>T2</div><div>T3</div><div>T4</div><div>T5</div><div>T6</div><div>T7</div>
+    </div>
+    
+    <div class="calendar" id="calendar"></div>
+
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <span class="close-btn" id="closeBtn">&times;</span>
+            <h2 id="modalDate">Ngày</h2>
+            <h3 id="modalTitle"></h3>
+            <p id="modalDetail"></p>
+            <div class="links-container" id="modalLinks">
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
