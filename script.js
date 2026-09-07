@@ -58,21 +58,14 @@ function renderCalendar() {
         const dayEvent = eventsData.find(e => e.date === dateString);
         
         if (dayEvent) {
-            // Hộp chứa sự kiện
             const eventIndicator = document.createElement('div');
             eventIndicator.classList.add('event-indicator');
-            
-            // 1. Dòng tiêu đề
             const titleEl = document.createElement('div');
             titleEl.classList.add('event-title');
             titleEl.innerText = dayEvent.title ? capitalizeFirstLetter(dayEvent.title) : 'Có sự kiện';
             eventIndicator.appendChild(titleEl);
-
-            // 2. Dòng hiển thị Icon (Nếu Checkbox trong Sheet được Tick)
             let hasIcon = false;
             let iconHtml = '';
-            
-            // So sánh với true (nếu API trả về boolean) hoặc 'TRUE' (nếu API trả về chuỗi)
             if (dayEvent.rabbit === true || String(dayEvent.icon1).toUpperCase() === 'TRUE') { iconHtml += '<span>🐰</span>'; hasIcon = true; }
             if (dayEvent.pineapple === true || String(dayEvent.icon2).toUpperCase() === 'TRUE') { iconHtml += '<span>🍍</span>'; hasIcon = true; }
             if (dayEvent.dragon === true || String(dayEvent.icon3).toUpperCase() === 'TRUE') { iconHtml += '<span>🐲</span>'; hasIcon = true; }

@@ -86,12 +86,10 @@ button:hover {
     min-width: 0;
     background: transparent;
     border: 0.1px solid #757575;
-
-
 }
 
 .day:hover { 
-    background-color: #f4f4f4; 
+    background-color: #ffffff; 
 }
 
 .day.empty { 
@@ -130,6 +128,7 @@ button:hover {
     gap: 5px;
     border-top: 1px dashed #555555;
     padding-top: 4px;
+    overflow-wrap: break-word;
 }
 
 .modal-overlay {
