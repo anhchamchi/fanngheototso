@@ -292,16 +292,12 @@ button:hover {
     .event-icons {
         font-size: 0.76rem;
         padding-top: 4px;
-        
-        /* 1. Dùng Grid để ép chính xác số cột */
         display: grid;
-        grid-template-columns: repeat(2, 1fr); /* Chia đúng 2 cột (2 icon/hàng) */
+        grid-template-columns: repeat(2, 1fr);
         gap: 2px;
-        justify-items: start; /* Căn các icon sang lề trái */
-        
-        /* 2. Giới hạn tối đa 2 hàng */
+        justify-items: start; 
         overflow: hidden;
-        max-height: 3rem; /* Khóa cứng chiều cao (vừa đủ cho 2 hàng icon). Nếu thêm icon thứ 5, 6 nó sẽ tự bị giấu đi */
+        max-height: 3rem;
     }
 
   
