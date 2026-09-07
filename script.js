@@ -137,6 +137,56 @@ document.getElementById('nextBtn').addEventListener('click', () => {
 fetchEvents();
 
 // Chế độ tự động quét cập nhật dữ liệu ngầm sau 30 giây
+// setInterval(async () => {
+//     try {
+//         const response = await fetch(SHEET_API_URL + "?t=" + new Date().getTime());
+//         const newData = await response.json();
+        
+//         if (newData && newData.length >= 0) {
+//             eventsData = newData;
+//             renderCalendar(); 
+//         }
+//     } catch (error) {
+//         console.error('Lỗi đồng bộ ngầm:', error);
+//     }
+// }, 30000);
+async function fetchEvents() {
+    // 1. KIỂM TRA BỘ NHỚ TẠM (LOCAL STORAGE)
+    const cachedData = localStorage.getItem('calendarEvents');
+    
+    if (cachedData) {
+        // Nếu đã từng vào web, lấy dữ liệu cũ ra vẽ lịch ngay lập tức (0 giây chờ)
+        eventsData = JSON.parse(cachedData);
+        loadingEl.style.display = 'none'; 
+        renderCalendar(); 
+    } else {
+        // Lần đầu tiên vào web chưa có data, mới hiện chữ Đang tải
+        loadingEl.style.display = 'block'; 
+    }
+
+    // 2. CHẠY NGẦM ĐỂ LẤY DỮ LIỆU MỚI TỪ GOOGLE SHEETS
+    try {
+        const response = await fetch(SHEET_API_URL + "?t=" + new Date().getTime());
+        const newData = await response.json();
+        
+        // 3. CẬP NHẬT DỮ LIỆU VÀ GHI ĐÈ LÊN BỘ NHỚ TẠM
+        if (newData && newData.length >= 0) {
+            eventsData = newData;
+            // Lưu dữ liệu mới nhất vào máy người dùng cho lần truy cập sau
+            localStorage.setItem('calendarEvents', JSON.stringify(eventsData)); 
+            
+            loadingEl.style.display = 'none';
+            renderCalendar(); // Vẽ lại lịch với dữ liệu mới (nếu có thay đổi)
+        }
+    } catch (error) {
+        // Nếu mất mạng và không có cả dữ liệu cũ
+        if (!cachedData) { 
+            loadingEl.innerText = "Lỗi khi tải dữ liệu từ máy chủ!";
+        }
+        console.error('Error fetching data:', error);
+    }
+}
+// Chế độ tự động quét cập nhật dữ liệu ngầm sau 30 giây
 setInterval(async () => {
     try {
         const response = await fetch(SHEET_API_URL + "?t=" + new Date().getTime());
@@ -144,6 +194,8 @@ setInterval(async () => {
         
         if (newData && newData.length >= 0) {
             eventsData = newData;
+            // Lưu dữ liệu mới vào bộ nhớ đệm
+            localStorage.setItem('calendarEvents', JSON.stringify(eventsData));
             renderCalendar(); 
         }
     } catch (error) {

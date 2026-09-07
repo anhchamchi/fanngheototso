@@ -17,14 +17,19 @@
     background-attachment: fixed; 
     min-height: 100vh; 
 }
-
+.logo img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    border-top: 20px;
+}
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
     padding-bottom: 10px;
-    padding-top: 20px;
     border-bottom: 2px solid #000000;
 }
 
@@ -233,6 +238,7 @@ button:hover {
     }
     .calendar{
         gap: 0px;
+        
     }
     #monthYear {
         grid-area: title;
@@ -257,6 +263,7 @@ button:hover {
 
     .day {
         min-height: 60px;
+        min-width: 40px;
         padding: 4px;
         border: 0.1px solid #757575;
     }
@@ -284,7 +291,17 @@ button:hover {
 
     .event-icons {
         font-size: 0.76rem;
-        padding-top: 2px;
+        padding-top: 4px;
+        
+        /* 1. Dùng Grid để ép chính xác số cột */
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Chia đúng 2 cột (2 icon/hàng) */
+        gap: 3px;
+        justify-items: start; /* Căn các icon sang lề trái */
+        
+        /* 2. Giới hạn tối đa 2 hàng */
+        overflow: hidden;
+        max-height: 3rem; /* Khóa cứng chiều cao (vừa đủ cho 2 hàng icon). Nếu thêm icon thứ 5, 6 nó sẽ tự bị giấu đi */
     }
 
   
