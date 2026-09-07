@@ -39,7 +39,7 @@ h1 {
 }
 
 button {
-    background-color: #e4f1f1; 
+    background-color: #ffffff; 
     color: black; 
     border: 0.1px solid #757575;
     border-radius: 10px;
@@ -113,7 +113,7 @@ button:hover {
 .event-indicator {
     margin-top: 5px;
     color: black;
-    padding: 4px 6px;
+    padding: 2px 6px;
     display: flex;
     flex-direction: column;
     gap: 4px;
@@ -296,7 +296,7 @@ button:hover {
         /* 1. Dùng Grid để ép chính xác số cột */
         display: grid;
         grid-template-columns: repeat(2, 1fr); /* Chia đúng 2 cột (2 icon/hàng) */
-        gap: 3px;
+        gap: 2px;
         justify-items: start; /* Căn các icon sang lề trái */
         
         /* 2. Giới hạn tối đa 2 hàng */
