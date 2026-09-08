@@ -55,33 +55,38 @@ function renderCalendar() {
         const dateString = `${String(i).padStart(2, '0')}/${String(month + 1).padStart(2, '0')}/${year}`;
         dayDiv.innerHTML = `<div class="date-num">${i}</div>`;
 
-        const dayEvent = eventsData.find(e => e.date === dateString);
+        const dayEvents = eventsData.filter(e => e.date === dateString);
         
-        if (dayEvent) {
+        dayEvents.forEach(dayEvent => {
             const eventIndicator = document.createElement('div');
             eventIndicator.classList.add('event-indicator');
+           
             const titleEl = document.createElement('div');
             titleEl.classList.add('event-title');
-            titleEl.innerText = dayEvent.title ? capitalizeFirstLetter(dayEvent.title) : 'Có sự kiện';
+            titleEl.innerText = dayEvent.title ? dayEvent.title.toUpperCase() : 'CÓ SỰ KIỆN';
             eventIndicator.appendChild(titleEl);
-            let hasIcon = false;
+            
             let iconHtml = '';
-            if (dayEvent.rabbit === true || String(dayEvent.icon1).toUpperCase() === 'TRUE') { iconHtml += '<span>🐰</span>'; hasIcon = true; }
-            if (dayEvent.pineapple === true || String(dayEvent.icon2).toUpperCase() === 'TRUE') { iconHtml += '<span>🍍</span>'; hasIcon = true; }
-            if (dayEvent.dragon === true || String(dayEvent.icon3).toUpperCase() === 'TRUE') { iconHtml += '<span>🐲</span>'; hasIcon = true; }
-            if (dayEvent.DaLAB === true || String(dayEvent.icon3).toUpperCase() === 'TRUE') { iconHtml += '<span>🧪</span>'; hasIcon = true; }
+            if (dayEvent.rabbit === true || String(dayEvent.icon1).toUpperCase() === 'TRUE') { iconHtml += '<span>🐰</span>'; }
+            if (dayEvent.pineapple === true || String(dayEvent.icon2).toUpperCase() === 'TRUE') { iconHtml += '<span>🍍</span>'; }
+            if (dayEvent.dragon === true || String(dayEvent.icon3).toUpperCase() === 'TRUE') { iconHtml += '<span>🐉</span>'; }
+            if (dayEvent.DaLAB === true || String(dayEvent.icon4).toUpperCase() === 'TRUE') { iconHtml += '<span>🧪</span>'; }
 
-            if (hasIcon) {
+            if (iconHtml !== '') {
                 const iconsEl = document.createElement('div');
                 iconsEl.classList.add('event-icons');
                 iconsEl.innerHTML = iconHtml;
                 eventIndicator.appendChild(iconsEl);
             }
 
-            dayDiv.appendChild(eventIndicator);
-            dayDiv.addEventListener('click', () => openModal(dateString, dayEvent));
-        }
+            eventIndicator.addEventListener('click', (e) => {
+                e.stopPropagation();
+                openModal(dateString, dayEvent);
+            });
 
+            dayDiv.appendChild(eventIndicator);
+        });
+    
         calendarEl.appendChild(dayDiv);
     }
 
