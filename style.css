@@ -188,7 +188,8 @@ button:hover {
     margin-bottom: 20px; 
     font-style: italic; 
     font-size: 0.95rem; 
-    word-break: break-all;
+    word-break: normal; 
+    overflow-wrap: break-word;
 }
 
 
